@@ -6,6 +6,7 @@ class GameScene: CCNode {
     weak var arrow: Arrow!
     weak var finish: CCNode!
     weak var directionsLbl: CCLabelTTF!
+    weak var readyLabel: CCLabelTTF!
     var otherHorses: [Horse] = []
     weak var myHorse: Horse!
     var allHorses: [Horse] = []
@@ -15,53 +16,57 @@ class GameScene: CCNode {
     var currentAcceptedGesture: String!
     var hasPenalty: Bool!
     var _gameOver: Bool!
-    
+    var _curCountdown: Int!
+    var _hasGameKitMP: Bool = false
     
     //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
     func didLoadFromCCB() {
         
-        setupGestures()
-        
         hasPenalty = false
         _gameOver = false
         restartBtn.visible = false
+        directionsLbl.visible = false
+        arrow.visible = false
+        _curCountdown = 3
+        
+        readyLabel.zOrder = 100
         
         var director = CCDirector.sharedDirector()
         
         // add your horse
         myHorse = CCBReader.load("Horse") as! Horse
         myHorse.position.y = director.viewSize().height - 50
-        myHorse.position.x = 60
+        myHorse.position.x = 125
         myHorse.scale = 0.25
         allHorses.append(myHorse)
         self.addChild(myHorse)
         
+        var myHorseLabel = CCLabelTTF.labelWithString("You", fontName: "Helvetica", fontSize: 16)
+        myHorseLabel.position.y = myHorse.position.y
+        myHorseLabel.position.x = 25
+        self.addChild(myHorseLabel)
+        
         // add all of the gamecenter horses (or AI)
-        for i in 1...2 {
+        // for each player, create a horse and set their name
+        for i in 2...4 {
             var horse = CCBReader.load("Horse") as! Horse
-            horse.position.y = CGFloat(Int(director.viewSize().height) - (75 * i))
-            horse.position.x = 60
+            horse.position.y = CGFloat(Int(director.viewSize().height) - (50 * i))
+            horse.position.x = 125
             horse.scale = 0.25
             self.addChild(horse)
             otherHorses.append(horse)
             allHorses.append(horse)
         }
         
-        
-        
-        // add the arrow
-//        arrow = CCBReader.load("Arrow") as! Arrow
-//        arrow.position = ccp(60, 60)
-//        arrow.scale = 0.25
-//        //arrow.visible = false
-//        self.addChild(arrow)
-        
-//        finish = CCBReader.load("Finish") as! Finish
-//        finish.position.x = director.viewSize().width - 50
-//        finish.position.y = director.viewSize().height - 25
-//        self.addChild(finish)
-        
+        self.schedule("countDown", interval: 1)
+        setupGestures()
         self.updateAndShowGesture()
+    }
+    
+    func countDown()
+    {
+        readyLabel.string = String(_curCountdown)
+        _curCountdown = _curCountdown - 1
     }
     
     override func update(delta: CCTime) {
@@ -71,12 +76,20 @@ class GameScene: CCNode {
             _gameOver = true
             
             restartBtn.visible = true
-            
+            return
+        }
+        
+        if (_curCountdown < 0) {
+            readyLabel.visible = false
+            directionsLbl.visible = true
+            arrow.visible = true
+            self.unschedule("countDown")
         }
     }
     
     func restartGame()
     {
+        _curCountdown = 3;
         var gameScene = CCBReader.loadAsScene("GameScene")
         CCDirector.sharedDirector().replaceScene(gameScene)
     }
@@ -146,7 +159,7 @@ class GameScene: CCNode {
     }
     
     func swipeLeft() {
-        if (_gameOver == true) {
+        if (_gameOver == true || _curCountdown > -1) {
             return
         }
         
@@ -157,7 +170,7 @@ class GameScene: CCNode {
     }
     
     func swipeRight() {
-        if (_gameOver == true) {
+        if (_gameOver == true || _curCountdown > -1) {
             return
         }
         
@@ -168,7 +181,7 @@ class GameScene: CCNode {
     }
     
     func swipeUp() {
-        if (_gameOver == true) {
+        if (_gameOver == true || _curCountdown > -1) {
             return
         }
         
@@ -179,7 +192,7 @@ class GameScene: CCNode {
     }
     
     func swipeDown() {
-        if (_gameOver == true) {
+        if (_gameOver == true || _curCountdown > -1) {
             return
         }
         
