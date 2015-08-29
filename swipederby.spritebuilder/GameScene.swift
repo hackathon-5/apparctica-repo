@@ -21,6 +21,8 @@ class GameScene: CCNode {
     
     //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
     func didLoadFromCCB() {
+        OALSimpleAudio.sharedInstance().preloadBg("zelda.mp3")
+        OALSimpleAudio.sharedInstance().playBgWithLoop(true)
         
         hasPenalty = false
         _gameOver = false

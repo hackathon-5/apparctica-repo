@@ -76,14 +76,14 @@
 		<key></key>
 		<dict>
 			<key>previewFolderHidden</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>Sprites</key>
 		<dict/>
 		<key>ccbResources</key>
 		<dict>
 			<key>previewFolderHidden</key>
-			<false/>
+			<true/>
 		</dict>
 		<key>ccbResources/ccbButtonHighlighted.png</key>
 		<dict>

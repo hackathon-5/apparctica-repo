@@ -7,6 +7,11 @@ class MainScene: CCNode, GCHelperDelegate {
         GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 2, viewController: CCDirector.sharedDirector(), delegate: self)
     }
     
+    func play2() {
+        var gameScene = CCBReader.loadAsScene("GameScene")
+        CCDirector.sharedDirector().presentScene(gameScene)
+    }
+    
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
         
     }
@@ -19,4 +24,8 @@ class MainScene: CCNode, GCHelperDelegate {
         var gameScene = CCBReader.loadAsScene("GameScene")
         CCDirector.sharedDirector().presentScene(gameScene)
     }
+    func didLoadFromCCB() {
+        OALSimpleAudio.sharedInstance().stopEverything()
+    }
+
 }
