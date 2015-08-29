@@ -150,7 +150,7 @@ class SinglePlayerGameScene: CCNode {
     func restartGame()
     {
         _curCountdown = 3;
-        var gameScene = CCBReader.loadAsScene("SinglePlayerGameScene")
+        var gameScene = CCBReader.loadAsScene("MainScene")
         CCDirector.sharedDirector().replaceScene(gameScene)
     }
     
