@@ -17,7 +17,7 @@ class GameScene: CCNode {
     var hasPenalty: Bool!
     var _gameOver: Bool!
     var _curCountdown: Int!
-    var _hasGameKitMP: Bool = false
+    var _hasGameKitMP: Bool = true
     
     //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
     func didLoadFromCCB() {

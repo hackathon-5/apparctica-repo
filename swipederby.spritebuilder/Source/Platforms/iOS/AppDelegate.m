@@ -27,6 +27,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
+#import "swipederby-Swift.h"
 
 @implementation AppController
 
@@ -53,6 +54,9 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
+        
+    [[GCHelper sharedInstance] authenticateLocalUser];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenter) name:@"gameCenter" object:nil];
     
     return YES;
 }
@@ -60,6 +64,15 @@
 - (CCScene*) startScene
 {
     return [CCBReader loadAsScene:@"MainScene"];
+}
+
+- (UIViewController *)viewControllerForPresentingModalView {
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    return [app navController];
+}
+
+- (void) showGameCenter {
+    [[GCHelper sharedInstance] showGameCenter:[self viewControllerForPresentingModalView] viewState:GKGameCenterViewControllerStateAchievements];
 }
 
 @end
