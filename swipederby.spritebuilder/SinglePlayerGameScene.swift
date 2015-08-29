@@ -57,6 +57,23 @@ class SinglePlayerGameScene: CCNode {
 //            myHorseLabel.position.x = 25
 //            self.addChild(myHorseLabel)
 //        }
+        var i = 2
+        while i<=5 {
+                    var horse = CCBReader.load("SingleHorse") as! SingleHorse
+                    horse.position.y = CGFloat(Int(director.viewSize().height) - (50 * i))
+                    i = i + 1
+                    horse.position.x = 125
+                    horse.scale = 0.25
+                    self.addChild(horse)
+                    otherHorses.append(horse)
+                    allHorses.append(horse)
+        
+            var myHorseLabel = CCLabelTTF.labelWithString(String(i), fontName: "Helvetica", fontSize: 16)
+
+                    myHorseLabel.position.y = myHorse.position.y
+                    myHorseLabel.position.x = 25
+                    self.addChild(myHorseLabel)
+        }
         
     }
     
@@ -112,6 +129,11 @@ class SinglePlayerGameScene: CCNode {
             readyLabel.visible = false
             directionsLbl.visible = true
             arrow.visible = true
+            
+            let diceRoll = Int(arc4random_uniform(60))
+            if diceRoll < 5 && diceRoll > 0{
+                allHorses[diceRoll].scoot()
+            }
         }
     }
     
