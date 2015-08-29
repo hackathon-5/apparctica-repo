@@ -12,6 +12,8 @@
 		6364CFA41B91F84C007DF1D8 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6364CFA31B91F84C007DF1D8 /* Default-Portrait.png */; };
 		6364CFA81B91F96C007DF1D8 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 6364CFA71B91F96C007DF1D8 /* Default-Landscape.png */; };
 		6364CFAC1B920AE0007DF1D8 /* zelda.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6364CFAB1B920AE0007DF1D8 /* zelda.mp3 */; };
+		6364CFAE1B9217B5007DF1D8 /* SinglePlayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6364CFAD1B9217B5007DF1D8 /* SinglePlayerGameScene.swift */; };
+		6364CFB01B921BFE007DF1D8 /* SingleHorse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6364CFAF1B921BFE007DF1D8 /* SingleHorse.swift */; };
 		7606479D1B915AD8007A9E77 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606479C1B915AD8007A9E77 /* Arrow.swift */; };
 		760647A91B916DFA007A9E77 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760647A81B916DFA007A9E77 /* GameScene.swift */; };
 		7649210C1B919FE00019B304 /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7649210B1B919FE00019B304 /* GCHelper.swift */; };
@@ -169,6 +171,8 @@
 		6364CFA31B91F84C007DF1D8 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		6364CFA71B91F96C007DF1D8 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		6364CFAB1B920AE0007DF1D8 /* zelda.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zelda.mp3; sourceTree = "<group>"; };
+		6364CFAD1B9217B5007DF1D8 /* SinglePlayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePlayerGameScene.swift; sourceTree = "<group>"; };
+		6364CFAF1B921BFE007DF1D8 /* SingleHorse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleHorse.swift; sourceTree = "<group>"; };
 		7606479C1B915AD8007A9E77 /* Arrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
 		760647A81B916DFA007A9E77 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		7649210B1B919FE00019B304 /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
@@ -455,8 +459,10 @@
 				7A046D7519E84C36004C4763 /* MainScene.swift */,
 				D352B48019EC608A00829775 /* MetalShaders */,
 				766C7B681B914958008A2126 /* Horse.swift */,
+				6364CFAF1B921BFE007DF1D8 /* SingleHorse.swift */,
 				7606479C1B915AD8007A9E77 /* Arrow.swift */,
 				760647A81B916DFA007A9E77 /* GameScene.swift */,
+				6364CFAD1B9217B5007DF1D8 /* SinglePlayerGameScene.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -842,7 +848,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
+				6364CFB01B921BFE007DF1D8 /* SingleHorse.swift in Sources */,
 				7649210C1B919FE00019B304 /* GCHelper.swift in Sources */,
+				6364CFAE1B9217B5007DF1D8 /* SinglePlayerGameScene.swift in Sources */,
 				766C7B691B914958008A2126 /* Horse.swift in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
