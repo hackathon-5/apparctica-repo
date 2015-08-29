@@ -13,7 +13,7 @@ class Horse : CCSprite {
     {
         var x = Int(self.position.x)
         var y = Int(self.position.y)
-        var toX = x + 50
+        var toX = x + 25
         
         moveTile(self, fromX: x, fromY: y, toX: toX, toY: y)
     }

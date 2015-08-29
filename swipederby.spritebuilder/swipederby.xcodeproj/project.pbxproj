@@ -10,7 +10,6 @@
 		5B121030197484FA004C1E1D /* swipederbyActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* swipederbyActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
 		7606479D1B915AD8007A9E77 /* Arrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7606479C1B915AD8007A9E77 /* Arrow.swift */; };
-		760647A71B916540007A9E77 /* Finish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760647A61B916540007A9E77 /* Finish.swift */; };
 		760647A91B916DFA007A9E77 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760647A81B916DFA007A9E77 /* GameScene.swift */; };
 		766C7B691B914958008A2126 /* Horse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766C7B681B914958008A2126 /* Horse.swift */; };
 		7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A046D7519E84C36004C4763 /* MainScene.swift */; };
@@ -163,7 +162,6 @@
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
 		7606479C1B915AD8007A9E77 /* Arrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arrow.swift; sourceTree = "<group>"; };
-		760647A61B916540007A9E77 /* Finish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Finish.swift; sourceTree = "<group>"; };
 		760647A81B916DFA007A9E77 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		766C7B681B914958008A2126 /* Horse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Horse.swift; sourceTree = "<group>"; };
 		7A046D7519E84C36004C4763 /* MainScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainScene.swift; path = Source/MainScene.swift; sourceTree = "<group>"; };
@@ -447,7 +445,6 @@
 				D352B48019EC608A00829775 /* MetalShaders */,
 				766C7B681B914958008A2126 /* Horse.swift */,
 				7606479C1B915AD8007A9E77 /* Arrow.swift */,
-				760647A61B916540007A9E77 /* Finish.swift */,
 				760647A81B916DFA007A9E77 /* GameScene.swift */,
 			);
 			name = Source;
@@ -826,7 +823,6 @@
 			files = (
 				B73789871807631A0076A88C /* main.m in Sources */,
 				766C7B691B914958008A2126 /* Horse.swift in Sources */,
-				760647A71B916540007A9E77 /* Finish.swift in Sources */,
 				7A046D7919E84ED5004C4763 /* MainScene.swift in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 				760647A91B916DFA007A9E77 /* GameScene.swift in Sources */,

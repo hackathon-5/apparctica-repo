@@ -2,9 +2,13 @@ import Foundation
 
 class GameScene: CCNode {
     
-    var horse: Horse!
-    var arrow: Arrow!
-    var finish: Finish!
+    //var horse: Horse!
+    weak var arrow: Arrow!
+    weak var finish: CCNode!
+    weak var directionsLbl: CCLabelTTF!
+    var otherHorses: [Horse] = []
+    weak var myHorse: Horse!
+    var allHorses: [Horse] = []
     
     var restartBtn: CCButton!
     
@@ -16,31 +20,46 @@ class GameScene: CCNode {
     //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
     func didLoadFromCCB() {
         
-        hasPenalty = false
         setupGestures()
+        
+        hasPenalty = false
         _gameOver = false
         restartBtn.visible = false
         
         var director = CCDirector.sharedDirector()
         
-        // add a horse
-        horse = CCBReader.load("Horse") as! Horse
-        horse.position.y = director.viewSize().height - 50
-        horse.position.x = 60
-        horse.scale = 0.25
-        self.addChild(horse)
+        // add your horse
+        myHorse = CCBReader.load("Horse") as! Horse
+        myHorse.position.y = director.viewSize().height - 50
+        myHorse.position.x = 60
+        myHorse.scale = 0.25
+        allHorses.append(myHorse)
+        self.addChild(myHorse)
+        
+        // add all of the gamecenter horses (or AI)
+        for i in 1...2 {
+            var horse = CCBReader.load("Horse") as! Horse
+            horse.position.y = CGFloat(Int(director.viewSize().height) - (75 * i))
+            horse.position.x = 60
+            horse.scale = 0.25
+            self.addChild(horse)
+            otherHorses.append(horse)
+            allHorses.append(horse)
+        }
+        
+        
         
         // add the arrow
-        arrow = CCBReader.load("Arrow") as! Arrow
-        arrow.position = ccp(60, 60)
-        arrow.scale = 0.25
-        //arrow.visible = false
-        self.addChild(arrow)
+//        arrow = CCBReader.load("Arrow") as! Arrow
+//        arrow.position = ccp(60, 60)
+//        arrow.scale = 0.25
+//        //arrow.visible = false
+//        self.addChild(arrow)
         
-        finish = CCBReader.load("Finish") as! Finish
-        finish.position.x = director.viewSize().width - 50
-        finish.position.y = director.viewSize().height - 25
-        self.addChild(finish)
+//        finish = CCBReader.load("Finish") as! Finish
+//        finish.position.x = director.viewSize().width - 50
+//        finish.position.y = director.viewSize().height - 25
+//        self.addChild(finish)
         
         self.updateAndShowGesture()
     }
@@ -64,7 +83,13 @@ class GameScene: CCNode {
     
     func isGameOver() -> Bool
     {
-        return ((horse.position.x + (horse.contentSizeInPoints.width * 0.25)) >= finish.position.x)
+        for horse in allHorses {
+            if ((horse.position.x + (horse.contentSizeInPoints.width * 0.12)) >= finish.position.x) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func updateAndShowGesture()
@@ -85,15 +110,19 @@ class GameScene: CCNode {
         switch (direction) {
         case "left":
             arrow.setLeft()
+            directionsLbl.string = "Swipe Left!"
             break
         case "right":
             arrow.setRight()
+            directionsLbl.string = "Swipe Right!"
             break;
         case "up":
             arrow.setUp()
+            directionsLbl.string = "Swipe Up!"
             break;
         default:
             arrow.setDown()
+            directionsLbl.string = "Swipe Down!"
             break;
         }
     }
@@ -122,7 +151,7 @@ class GameScene: CCNode {
         }
         
         if (self.currentAcceptedGesture == "left") {
-            horse.scoot()
+            myHorse.scoot()
             self.updateAndShowGesture()
         }
     }
@@ -133,7 +162,7 @@ class GameScene: CCNode {
         }
         
         if (self.currentAcceptedGesture == "right") {
-            horse.scoot()
+            myHorse.scoot()
             self.updateAndShowGesture()
         }
     }
@@ -144,7 +173,7 @@ class GameScene: CCNode {
         }
         
         if (self.currentAcceptedGesture == "up") {
-            horse.scoot()
+            myHorse.scoot()
             self.updateAndShowGesture()
         }
     }
@@ -155,7 +184,7 @@ class GameScene: CCNode {
         }
         
         if (self.currentAcceptedGesture == "down") {
-            horse.scoot()
+            myHorse.scoot()
             self.updateAndShowGesture()
         }
     }
