@@ -58,6 +58,8 @@
     [[GCHelper sharedInstance] authenticateLocalUser];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGameCenter) name:@"gameCenter" object:nil];
     
+
+    
     return YES;
 }
 

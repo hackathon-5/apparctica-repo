@@ -24,7 +24,6 @@ class GameScene: CCNode, GCHelperDelegate {
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
         println("mainscene match")
-        
     }
     
     func matchEnded() {
@@ -72,6 +71,9 @@ class GameScene: CCNode, GCHelperDelegate {
         
     //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
     func didLoadFromCCB() {
+        
+        OALSimpleAudio.sharedInstance().preloadBg("zelda.mp3")
+        OALSimpleAudio.sharedInstance().playBgWithLoop(true)
         
         GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 4, viewController: CCDirector.sharedDirector(), delegate: self)
         

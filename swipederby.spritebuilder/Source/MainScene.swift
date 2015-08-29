@@ -2,15 +2,21 @@ import Foundation
 
 class MainScene: CCNode {
     
-    var horses : Array<Horse>!
-        
-    func didLoadFromCCB() {
-        GCHelper.authenticateLocalUser()
+
+    func play() {
+        var gameScene = CCBReader.loadAsScene("GameScene")
+        CCDirector.sharedDirector().presentScene(gameScene)
     }
     
-    func play() {
-        let gameScene = CCBReader.loadAsScene("GameScene")
+    func play2() {
+        // needs to worked to not use multiplayer
+        var gameScene = CCBReader.loadAsScene("GameScene")
         CCDirector.sharedDirector().presentScene(gameScene)
+    }
+    
+    func didLoadFromCCB() {
+         OALSimpleAudio.sharedInstance().stopEverything()
+        //GCHelper.authenticateLocalUser()
     }
 
 }
