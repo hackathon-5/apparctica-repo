@@ -8,9 +8,8 @@ class MainScene: CCNode {
         CCDirector.sharedDirector().presentScene(gameScene)
     }
     
-    func play2() {
-        // needs to worked to not use multiplayer
-        var gameScene = CCBReader.loadAsScene("GameScene")
+    func playSinglePlayer() {
+        var gameScene = CCBReader.loadAsScene("SinglePlayerGameScene")
         CCDirector.sharedDirector().presentScene(gameScene)
     }
     

@@ -577,7 +577,7 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>play2</string>
+							<string>playSinglePlayer</string>
 							<integer>1</integer>
 						</array>
 					</dict>
