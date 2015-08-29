@@ -143,6 +143,18 @@ class GameScene: CCNode, GCHelperDelegate {
     {
         for horse in allHorses {
             if ((horse.position.x + (horse.contentSizeInPoints.width * 0.12)) >= finish.position.x) {
+                if (horse.name != "you") {
+                    var myHorseLabel = CCLabelTTF.labelWithString("You Lose!", fontName: "Helvetica", fontSize: 16)
+                    myHorseLabel.position.y = restartBtn.position.y + 100
+                    myHorseLabel.position.x = restartBtn.position.x
+                    self.addChild(myHorseLabel)
+                }
+                else {
+                    var myHorseLabel = CCLabelTTF.labelWithString("You Win!", fontName: "Helvetica", fontSize: 16)
+                    myHorseLabel.position.y = restartBtn.position.y + 100
+                    myHorseLabel.position.x = restartBtn.position.x
+                    self.addChild(myHorseLabel)
+                }
                 return true
             }
         }

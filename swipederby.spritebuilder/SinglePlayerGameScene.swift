@@ -29,7 +29,7 @@ class SinglePlayerGameScene: CCNode {
         
         // add your horse
         myHorse = CCBReader.load("SingleHorse") as! SingleHorse
-        myHorse.position.y = director.viewSize().height - 50
+        myHorse.position.y = director.viewSize().height - 100
         myHorse.position.x = 125
         myHorse.scale = 0.25
         allHorses.append(myHorse)
