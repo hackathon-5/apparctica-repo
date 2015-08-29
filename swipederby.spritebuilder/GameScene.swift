@@ -65,7 +65,7 @@ class GameScene: CCNode, GCHelperDelegate {
             horse.scale = 0.25
             horse.name = playerId
             
-            var color = CCColor(red: Float(arc4random_uniform(255)), green: Float(arc4random_uniform(255)), blue: Float(arc4random_uniform(255)))
+            var color = CCColor(red: 0, green: 0, blue: 0)
             var moveTo = CCActionTintTo(duration: 0.2, color: color)
             horse.runAction(moveTo)
             
