@@ -57,9 +57,15 @@ class SinglePlayerGameScene: CCNode {
 //            myHorseLabel.position.x = 25
 //            self.addChild(myHorseLabel)
 //        }
-        var i = 2
+        var i = 3
         while i<=5 {
+            //var skinColor = colorRGBA(247,224,194,1)
+            
+            //ccColor3B skinColor = skinColors[arc4random() % 5];
+            //[skin setColor:skinColor];
                     var horse = CCBReader.load("SingleHorse") as! SingleHorse
+            
+            //horse.color =  CCColor(red: 255, green: 255, blue: 255)
                     horse.position.y = CGFloat(Int(director.viewSize().height) - (50 * i))
                     i = i + 1
                     horse.position.x = 125
@@ -131,7 +137,7 @@ class SinglePlayerGameScene: CCNode {
             arrow.visible = true
             
             let diceRoll = Int(arc4random_uniform(60))
-            if diceRoll < 5 && diceRoll > 0{
+            if diceRoll < 4 && diceRoll > 0{
                 allHorses[diceRoll].scoot()
             }
         }
