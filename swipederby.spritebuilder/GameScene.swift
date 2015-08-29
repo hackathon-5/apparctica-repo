@@ -23,15 +23,12 @@ class GameScene: CCNode, GCHelperDelegate {
     var _inProgress: Bool = false
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
-        println("mainscene match")
-        
         for horse in otherHorses
         {
             if (horse.name != "you" && horse.name == fromPlayer) {
                 horse.scoot(true)
             }
         }
-        
     }
     
     func matchEnded() {
@@ -67,6 +64,11 @@ class GameScene: CCNode, GCHelperDelegate {
             horse.position.x = 125
             horse.scale = 0.25
             horse.name = playerId
+            
+            var color = CCColor(red: Float(arc4random_uniform(255)), green: Float(arc4random_uniform(255)), blue: Float(arc4random_uniform(255)))
+            var moveTo = CCActionTintTo(duration: 0.2, color: color)
+            horse.runAction(moveTo)
+            
             self.addChild(horse)
             otherHorses.append(horse)
             allHorses.append(horse)
@@ -135,7 +137,7 @@ class GameScene: CCNode, GCHelperDelegate {
     func restartGame()
     {
         _curCountdown = 3;
-        var gameScene = CCBReader.loadAsScene("GameScene")
+        var gameScene = CCBReader.loadAsScene("MainScene")
         CCDirector.sharedDirector().replaceScene(gameScene)
     }
     
@@ -144,15 +146,15 @@ class GameScene: CCNode, GCHelperDelegate {
         for horse in allHorses {
             if ((horse.position.x + (horse.contentSizeInPoints.width * 0.12)) >= finish.position.x) {
                 if (horse.name != "you") {
-                    var myHorseLabel = CCLabelTTF.labelWithString("You Lose!", fontName: "Helvetica", fontSize: 16)
-                    myHorseLabel.position.y = restartBtn.position.y + 100
-                    myHorseLabel.position.x = restartBtn.position.x
+                    var myHorseLabel = CCLabelTTF.labelWithString("You Lose!", fontName: "Helvetica", fontSize: 32)
+                    myHorseLabel.position.y = 300
+                    myHorseLabel.position.x = 300
                     self.addChild(myHorseLabel)
                 }
                 else {
-                    var myHorseLabel = CCLabelTTF.labelWithString("You Win!", fontName: "Helvetica", fontSize: 16)
-                    myHorseLabel.position.y = restartBtn.position.y + 100
-                    myHorseLabel.position.x = restartBtn.position.x
+                    var myHorseLabel = CCLabelTTF.labelWithString("You Win!", fontName: "Helvetica", fontSize: 32)
+                    myHorseLabel.position.y = 300
+                    myHorseLabel.position.x = 300
                     self.addChild(myHorseLabel)
                 }
                 return true

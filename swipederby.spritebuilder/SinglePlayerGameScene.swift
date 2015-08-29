@@ -70,6 +70,10 @@ class SinglePlayerGameScene: CCNode {
                     i = i + 1
                     horse.position.x = 125
                     horse.scale = 0.25
+            var color = CCColor(red: Float(arc4random_uniform(255)), green: Float(arc4random_uniform(255)), blue: Float(arc4random_uniform(255)))
+            var moveTo = CCActionTintTo(duration: 0.2, color: color)
+            horse.runAction(moveTo)
+            
                     self.addChild(horse)
                     otherHorses.append(horse)
                     allHorses.append(horse)
