@@ -24,6 +24,14 @@ class GameScene: CCNode, GCHelperDelegate {
     
     func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
         println("mainscene match")
+        
+        for horse in otherHorses
+        {
+            if (horse.name != "you" && horse.name == fromPlayer) {
+                horse.scoot(true)
+            }
+        }
+        
     }
     
     func matchEnded() {
@@ -38,9 +46,10 @@ class GameScene: CCNode, GCHelperDelegate {
         
         // add your horse
         myHorse = CCBReader.load("Horse") as! Horse
-        myHorse.position.y = director.viewSize().height - 50
+        myHorse.position.y = director.viewSize().height - 100
         myHorse.position.x = 125
         myHorse.scale = 0.25
+        myHorse.name = "you"
         allHorses.append(myHorse)
         self.addChild(myHorse)
         
@@ -53,16 +62,17 @@ class GameScene: CCNode, GCHelperDelegate {
         var i = 2
         for (playerId, player) in players {
             var horse = CCBReader.load("Horse") as! Horse
-            horse.position.y = CGFloat(Int(director.viewSize().height) - (50 * i))
+            horse.position.y = CGFloat(Int(director.viewSize().height) - 100 - (50 * i))
             i = i + 1
             horse.position.x = 125
             horse.scale = 0.25
+            horse.name = playerId
             self.addChild(horse)
             otherHorses.append(horse)
             allHorses.append(horse)
             
             var myHorseLabel = CCLabelTTF.labelWithString(player.alias, fontName: "Helvetica", fontSize: 16)
-            myHorseLabel.position.y = myHorse.position.y
+            myHorseLabel.position.y = horse.position.y
             myHorseLabel.position.x = 25
             self.addChild(myHorseLabel)
         }
@@ -199,7 +209,7 @@ class GameScene: CCNode, GCHelperDelegate {
         }
         
         if (self.currentAcceptedGesture == "left") {
-            myHorse.scoot()
+            myHorse.scoot(false)
             self.updateAndShowGesture()
         }
     }
@@ -210,7 +220,7 @@ class GameScene: CCNode, GCHelperDelegate {
         }
         
         if (self.currentAcceptedGesture == "right") {
-            myHorse.scoot()
+            myHorse.scoot(false)
             self.updateAndShowGesture()
         }
     }
@@ -221,7 +231,7 @@ class GameScene: CCNode, GCHelperDelegate {
         }
         
         if (self.currentAcceptedGesture == "up") {
-            myHorse.scoot()
+            myHorse.scoot(false)
             self.updateAndShowGesture()
         }
     }
@@ -232,7 +242,7 @@ class GameScene: CCNode, GCHelperDelegate {
         }
         
         if (self.currentAcceptedGesture == "down") {
-            myHorse.scoot()
+            myHorse.scoot(false)
             self.updateAndShowGesture()
         }
     }

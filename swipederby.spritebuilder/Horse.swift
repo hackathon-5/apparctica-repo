@@ -10,7 +10,7 @@ import Foundation
 import GameKit
 
 class Horse : CCSprite {
-    func scoot()
+    func scoot(otherHorse: Bool)
     {
         var x = Int(self.position.x)
         var y = Int(self.position.y)
@@ -18,13 +18,16 @@ class Horse : CCSprite {
         
         moveTile(self, fromX: x, fromY: y, toX: toX, toY: y)
         
-        var testStr = "test"
-        let data = (testStr as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let success = GCHelper.match.sendDataToAllPlayers(data, withDataMode: .Reliable, error: nil)
-        if !success {
-            println("An unknown error occured while sending data")
+        if (otherHorse == false) {
+            var testStr = "test"
+            let data = (testStr as NSString).dataUsingEncoding(NSUTF8StringEncoding)
+            
+            let success = GCHelper.match.sendDataToAllPlayers(data, withDataMode: .Reliable, error: nil)
+            if !success {
+                println("An unknown error occured while sending data")
+            }
         }
+        
     }
     
     func moveTile(tile: Horse, fromX: Int, fromY: Int, toX: Int, toY: Int) {
