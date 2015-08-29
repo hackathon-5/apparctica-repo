@@ -1,6 +1,7 @@
 import Foundation
+import GameKit
 
-class GameScene: CCNode {
+class GameScene: CCNode, GCHelperDelegate {
     
     //var horse: Horse!
     weak var arrow: Arrow!
@@ -18,18 +19,21 @@ class GameScene: CCNode {
     var _gameOver: Bool!
     var _curCountdown: Int!
     var _hasGameKitMP: Bool = true
+    var _canStart: Bool = false
+    var _inProgress: Bool = false
     
-    //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
-    func didLoadFromCCB() {
+    func match(match: GKMatch, didReceiveData: NSData, fromPlayer: String) {
+        println("mainscene match")
         
-        hasPenalty = false
-        _gameOver = false
-        restartBtn.visible = false
-        directionsLbl.visible = false
-        arrow.visible = false
-        _curCountdown = 3
-        
-        readyLabel.zOrder = 100
+    }
+    
+    func matchEnded() {
+        let mainScene = CCBReader.loadAsScene("MainScene")
+        CCDirector.sharedDirector().presentScene(mainScene)
+    }
+    
+    func matchStarted() {
+        _canStart = true
         
         var director = CCDirector.sharedDirector()
         
@@ -46,21 +50,40 @@ class GameScene: CCNode {
         myHorseLabel.position.x = 25
         self.addChild(myHorseLabel)
         
-        // add all of the gamecenter horses (or AI)
-        // for each player, create a horse and set their name
-        for i in 2...4 {
+        let players = GCHelper.sharedInstance.playersDict
+        var i = 2
+        for (playerId, player) in players {
             var horse = CCBReader.load("Horse") as! Horse
             horse.position.y = CGFloat(Int(director.viewSize().height) - (50 * i))
+            i = i + 1
             horse.position.x = 125
             horse.scale = 0.25
             self.addChild(horse)
             otherHorses.append(horse)
             allHorses.append(horse)
+            
+            var myHorseLabel = CCLabelTTF.labelWithString(player.alias, fontName: "Helvetica", fontSize: 16)
+            myHorseLabel.position.y = myHorse.position.y
+            myHorseLabel.position.x = 25
+            self.addChild(myHorseLabel)
         }
         
-        self.schedule("countDown", interval: 1)
-        setupGestures()
-        self.updateAndShowGesture()
+    }
+        
+    //When working with scenes created in SpriteBuilder the method didLoadFromCCB is the right place to perform modifications that shall happen as soon as the scene gets initialized.
+    func didLoadFromCCB() {
+        
+        GCHelper.sharedInstance.findMatchWithMinPlayers(2, maxPlayers: 4, viewController: CCDirector.sharedDirector(), delegate: self)
+        
+        hasPenalty = false
+        _gameOver = false
+        restartBtn.visible = false
+        directionsLbl.visible = false
+        arrow.visible = false
+        _curCountdown = 3
+        
+        readyLabel.zOrder = 100
+        
     }
     
     func countDown()
@@ -71,6 +94,13 @@ class GameScene: CCNode {
     
     override func update(delta: CCTime) {
         
+        if (_canStart == true && _inProgress == false) {
+            self.schedule("countDown", interval: 1)
+            setupGestures()
+            self.updateAndShowGesture()
+            _inProgress = true
+        }
+        
         // check if game is over
         if (self.isGameOver()) {
             _gameOver = true
@@ -80,10 +110,13 @@ class GameScene: CCNode {
         }
         
         if (_curCountdown < 0) {
+            if (arrow.visible == false) {
+                self.unschedule("countDown")
+            }
+            
             readyLabel.visible = false
             directionsLbl.visible = true
             arrow.visible = true
-            self.unschedule("countDown")
         }
     }
     

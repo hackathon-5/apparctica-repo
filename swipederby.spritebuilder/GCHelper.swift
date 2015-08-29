@@ -90,7 +90,7 @@ class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCenterContro
             }
         }
     }
-    
+        
     // MARK: User functions
     
     class func authenticateLocalUser() {
